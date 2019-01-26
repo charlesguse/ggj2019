@@ -9,7 +9,7 @@
             "Alexa tell hello node hello",
             "Alexa ask hello node say hello"
           ],
-          "name": "hello node",
+          "name": "test-node",
           "description": "A basic skill made from Alexa Skills Kit template"
         }
       },
