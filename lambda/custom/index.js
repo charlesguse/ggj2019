@@ -39,7 +39,7 @@ const LaunchRequestHandler = {
 
       attributesManager.setSessionAttributes(attributes);
       const alexaScoreReport = BuildScoreString(handlerInput);
-      //const speechText =  GAMEINTROFILELOCATION +  ' You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! '+ S1FILELOCATION;
+      //Next: Add alexa prompt in middle
       const speechText =  GAMEINTROFILELOCATION + alexaScoreReport + 'Good luck! '+ S1FILELOCATION;
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -173,8 +173,10 @@ const LetsMakeAPartyIntentHandler = {
     attributes.cash += 300;
     attributes.currentQuestion += 1; //Setting up to handle next question
 
-
-    const speechText = S1YESFILELOCATION +  'You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
+    const alexaScoreReport = BuildScoreString(handlerInput);
+      
+    //const speechText = S1YESFILELOCATION +  'You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
+    const speechText = S1YESFILELOCATION +  alexaScoreReport + S2FILELOCATION;
     //const speechText = S1YESFILELOCATION + 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -387,11 +389,11 @@ exports.handler = Alexa.SkillBuilders.custom()
     LetsMakeAPartyIntentHandler,
     TooCrazyIntentHandler,
     IWillMakeItWorkIntentHandler,
+    TakeButtersInHandler,
+    DoNotTakeButtersInHandler,
     LifeEventIntentHandler,
     YesResponseLifeEventIntentHandler,
     NoResponseLifeEventIntentHandler,
-    TakeButtersInHandler,
-    DoNotTakeButtersInHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
@@ -423,5 +425,5 @@ function BuildScoreString(handlerInput){
   const cats = attributes.cats;
 
 
-  return ' You have ' + cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent.';
+  return ' You have ' + cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent';
 }
