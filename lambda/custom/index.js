@@ -9,24 +9,17 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
 
-      //DAN - JAN26 11 PM
-      //Try setting up the Attributes Manager... I think I jumpted the shark
-      //by thinking I could just write to it without doing any preparation.
+      //Get the attribute manager and establish session attributes for this game.
       const attributesManager = handlerInput.attributesManager;
       
       const attributes = attributesManager.getPersistentAttributes() || {};
       if (Object.keys(attributes).length === 0) {
         attributes.counter = 0;
-        //this.emit("attribute length was zero")
       }
 
       attributesManager.setSessionAttributes(attributes);
 
-      //DAN - JAN27 12:29 AM
-      //REMOVING THE COMMENT AND HOPING TO GET PERSISTENT ATTRIBUTE SET
-      //I WONDER IF I NEED "handlerInput." AT THE BEGINNING OF THE NEXT LINE;"
-      handlerInput.attributesManager.setPersistentAttributes(attributes);//DRN
-      const speechText = 'finally got persistent attributes working!'      ;
+      const speechText = 'The game has invoked itself properly.'      ;
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -40,13 +33,16 @@ const HelloWorldIntentHandler = {
     },
     handle(handlerInput) {
       console.log(JSON.stringify(handlerInput,null,2));
-      //OLD JUNK handlerInput.attributesManager.getPersistentAttribute();//DRN
-      //OLD JUNK this.attributes.counter += 1;
+
+      //let's just see if we can get to the attributes 
+      const attributesManager = handlerInput.attributesManager;
+
+      attributes = attributesManager.getSessionAttributes();
       
-      const speechText = 'Hello World!';//+ this.attributes.counter ;
+      const speechText = 'Yay! I got past getting attributes!';//+ this.attributes.counter ;
       return handlerInput.responseBuilder
         .speak(speechText)
-        //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+        .reprompt('this is the reprompt Dan put in')
         .getResponse();
     }
 };
