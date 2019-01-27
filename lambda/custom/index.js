@@ -330,7 +330,7 @@ const LifeEventIntentHandler = {
       newQuestion = Math.floor(Math.random() * length);
       console.log("newQuestion");
       console.log(newQuestion);
-    } while (attributes.charlieCurrentQuestion === newQuestion)
+    } while (attributes.charlieCurrentQuestion === newQuestion);
     console.log("LifeEventIntentHandler 3");
 
     attributes.charlieCurrentQuestion = newQuestion;
@@ -422,20 +422,20 @@ exports.handler = Alexa.SkillBuilders.custom()
 //DRN - Centralizing the logic to get Session value for current question number. 
 function GetQuestionNumber(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   return attributes.currentQuestion;
 }
 
 function AwaitingResponse(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   return attributes.awaitingResponse;
 }
 
 function BuildScoreString(handlerInput){
   const attributesManager = handlerInput.attributesManager;
 
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   const cash =  attributes.cash;
   const crazy = attributes.crazy;
   const cats = attributes.cats;
