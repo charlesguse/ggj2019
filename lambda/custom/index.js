@@ -17,15 +17,15 @@ const LaunchRequestHandler = {
       const attributes = attributesManager.getPersistentAttributes() || {};
       if (Object.keys(attributes).length === 0) {
         attributes.counter = 0;
-        this.emit("attribute length was zero")
+        //this.emit("attribute length was zero")
       }
 
-      // attributes.setSessionAttributes(attributes);
+      attributesManager.setSessionAttributes(attributes);
 
       //DAN - JAN26 11 PM
       //REMOVING THE NEXT LINE AND MAKING IT A COMMENT:
       //handlerInput.attributesManager.setPersistentAttributes(attributes);//DRN
-      const speechText = 'Welcome, you can say Hello or Help. Which would you like to try?';
+      const speechText = 'Finally got invocation working!';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
