@@ -8,7 +8,7 @@ const LaunchRequestHandler = {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-      //this.attributes.counter = 0;
+      this.attributes.counter = 0;
       const speechText = 'Welcome, you can say Hello or Help. Which would you like to try?';
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -23,7 +23,7 @@ const HelloWorldIntentHandler = {
     },
     handle(handlerInput) {
       console.log(JSON.stringify(handlerInput,null,2));
-      //this.attributes.counter += 1;
+      this.attributes.counter += 1;
       const speechText = 'Hello World!';//+ this.attributes.counter ;
       return handlerInput.responseBuilder
         .speak(speechText)
