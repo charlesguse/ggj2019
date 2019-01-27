@@ -4,7 +4,7 @@
 //Template for Audio source tag: ' <audio src="PUTURLHERE" />';
 const Alexa = require('ask-sdk-core');
 const GAMEINTROFILELOCATION =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
-const S1FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out3_MakeItWork.mp3" />';
+const S1FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Prompt.mp3" />';
 const S1YESFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out1_Yes.mp3" />';
 const S1NOFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out2_No.mp3" />';
 const S1MAKEITWORKFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out3_MakeItWork.mp3" />';
