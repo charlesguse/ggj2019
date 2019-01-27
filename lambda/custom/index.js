@@ -242,18 +242,19 @@ const LifeEventIntentHandler = {
       && !AwaitingResponse(handlerInput);
   },
   handle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
-    attributes = attributesManager.getSessionAttributes();
-    attributes.awaitingResponse = true;
+    // const attributesManager = handlerInput.attributesManager;
+    // attributes = attributesManager.getSessionAttributes();
+    // attributes.awaitingResponse = true;
 
-    const length = length(eventMap.events);
-    do {
-      newQuestion = Math.floor(Math.random() * length);
-    } while (attributes.charlieCurrentQuestion !== newQuestion)
-    attributes.charlieCurrentQuestion = newQuestion;
-    let event = eventMap.events[newQuestion]
-    // Any cleanup logic goes here.
-    const speechText = event.prompt;
+    // const length = length(eventMap.events);
+    // do {
+    //   newQuestion = Math.floor(Math.random() * length);
+    // } while (attributes.charlieCurrentQuestion !== newQuestion)
+    // attributes.charlieCurrentQuestion = newQuestion;
+    // let event = eventMap.events[newQuestion]
+    // // Any cleanup logic goes here.
+    // const speechText = event.prompt;
+    const speechText = "Dan be helpin";
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
