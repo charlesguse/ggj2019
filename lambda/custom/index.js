@@ -113,7 +113,7 @@ const IntentReflectorHandler = {
       
 
       const intentName = handlerInput.requestEnvelope.request.intent.name;
-      const speechText = `You just triggered ${intentName} with current question` + theCurrentQuestion;
+      const speechText = `You just triggered ${intentName} with current question ` + theCurrentQuestion;
  
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -148,7 +148,7 @@ const LetsMakeAPartyIntentHandler = {
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
-      && theCurrentQuestion === 1;
+      && theCurrentQuestion == 1;
   },
   handle(handlerInput) {
     
