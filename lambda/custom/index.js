@@ -295,7 +295,9 @@ const LifeEventIntentHandler = {
 
     do {
       newQuestion = Math.floor(Math.random() * length);
-    } while (attributes.charlieCurrentQuestion !== newQuestion)
+      console.log("newQuestion");
+      console.log(newQuestion);
+    } while (attributes.charlieCurrentQuestion === newQuestion)
     console.log("LifeEventIntentHandler 3");
 
     attributes.charlieCurrentQuestion = newQuestion;
