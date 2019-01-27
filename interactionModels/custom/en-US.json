@@ -19,8 +19,7 @@
                     "name": "HelloWorldIntent",
                     "slots": [],
                     "samples": [
-                        "hello",
-                        "hola",
+                        "hello"
                         "how are you",
                         "say hi world",
                         "say hi",
@@ -28,7 +27,32 @@
                         "say hello world",
                         "say hello"
                     ]
+                },
+                {
+                    "name": "LetsMakeAPartyIntent",
+                    "samples": [
+                        "yes, let's make a party",
+                        "we should party",
+                        "definitely party"
+                    ]
+                },
+                {
+                    "name": "TooCrazyIntent",
+                    "samples": [
+                        "no, that's too crazy",
+                        "too crazy",
+                        "crazy"
+                    ]
+                },
+                {
+                    "name": "IWillMakeItWorkIntent",
+                    "samples": [
+                        "i will make it work",
+                        "it can work",
+                        "make it work"
+                    ]
                 }
+
             ],
             "types": []
         }

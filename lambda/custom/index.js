@@ -19,7 +19,7 @@ const LaunchRequestHandler = {
 
       attributesManager.setSessionAttributes(attributes);
 
-      const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
+      const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" /> Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -126,12 +126,58 @@ const ErrorHandler = {
     }
 };
 
+const LetsMakeAPartyIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent';
+  },
+  handle(handlerInput) {
+    const speechText = 'You welcome Pepper with open arms and hold a party in her honor! One gift you bring are lotto tickets to celebrate her good luck. She is lucky because you just won $300! Pepper seems to get along with your feline friends as well!';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('this is the reprompt Dan put in')
+      .getResponse();
+  }
+};
+
+const TooCrazyIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'TooCrazyIntent';
+  },
+  handle(handlerInput) {
+    const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('this is the reprompt Dan put in')
+      .getResponse();
+  }
+};
+
+const IWillMakeItWorkIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'IWillMakeItWorkIntent';
+  },
+  handle(handlerInput) {
+    // Any cleanup logic goes here.
+    const speechText = 'You take in the cute Pepper, but realize that cats and dogs don not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100.';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('this is the reprompt Dan put in')
+      .getResponse();
+  }
+};
+
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
+    LetsMakeAPartyIntentHandler,
+    TooCrazyIntentHandler,
+    IWillMakeItWorkIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,

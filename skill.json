@@ -3,11 +3,10 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "A basic skill made from Alexa Skills Kit template",
+          "summary": "A fun choose your own adventure from South Bend Global Game Jam",
           "examplePhrases": [
-            "Alexa open hello node",
-            "Alexa tell hello node hello",
-            "Alexa ask hello node say hello"
+            "Alexa open can we keep him",
+            "Alexa play can we keep him"
           ],
           "name": "can-we-keep-him",
           "description": "A choose your own adventure game for GGJ2019."
