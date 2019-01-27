@@ -156,7 +156,13 @@ const ErrorHandler = {
 //HANDLER 1 of 3 FOR S1
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
-    const theCurrentQuestion = GetQuestionNumber(handlerInput);
+    console.log("HANDLER 1 of 3 FOR S1 canHandle Start");
+
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    theCurrentQuestion = attributes.currentQuestion;
+    console.log("HANDLER 1 of 3 FOR S1 canHandle have QuestionNumber");
+    //const theCurrentQuestion = GetQuestionNumber(handlerInput);
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
@@ -262,10 +268,10 @@ const TakeButtersInHandler = {
 
     attributes = attributesManager.getSessionAttributes();
     const cash =  attributes.cash - 100;
-    const cats = attributes.cats + 1;
+    //const cats = attributes.cats + 1;
 
     attributes.cash -= 100;
-    attributes.cats += 1;
+    //attributes.cats += 1;
     const speechText = S2YESBUTTERSFILELOCATION;
   
     return handlerInput.responseBuilder
@@ -324,7 +330,7 @@ const LifeEventIntentHandler = {
       newQuestion = Math.floor(Math.random() * length);
       console.log("newQuestion");
       console.log(newQuestion);
-    } while (attributes.charlieCurrentQuestion === newQuestion)
+    } while (attributes.charlieCurrentQuestion === newQuestion);
     console.log("LifeEventIntentHandler 3");
 
     attributes.charlieCurrentQuestion = newQuestion;
@@ -401,9 +407,6 @@ exports.handler = Alexa.SkillBuilders.custom()
     IWillMakeItWorkIntentHandler,
     TakeButtersInHandler,
     DoNotTakeButtersInHandler,
-    LifeEventIntentHandler,
-    YesResponseLifeEventIntentHandler,
-    NoResponseLifeEventIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
@@ -416,20 +419,20 @@ exports.handler = Alexa.SkillBuilders.custom()
 //DRN - Centralizing the logic to get Session value for current question number. 
 function GetQuestionNumber(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   return attributes.currentQuestion;
 }
 
 function AwaitingResponse(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   return attributes.awaitingResponse;
 }
 
 function BuildScoreString(handlerInput){
   const attributesManager = handlerInput.attributesManager;
 
-  attributes = attributesManager.getSessionAttributes();
+  let attributes = attributesManager.getSessionAttributes();
   const cash =  attributes.cash;
   const crazy = attributes.crazy;
   const cats = attributes.cats;

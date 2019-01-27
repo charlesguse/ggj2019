@@ -34,7 +34,8 @@
                         "yes let us make a party",
                         "we should party",
                         "definitely party",
-                        "sure"
+                        "sure",
+                        "yes"
                     ]
                 },
                 {
@@ -52,24 +53,6 @@
                         "i will make it work",
                         "it can work",
                         "make it work"
-                    ]
-                },
-                {
-                    "name": "LifeEventIntent",
-                    "samples": [
-                        "event"
-                    ]
-                },
-                {
-                    "name": "YesResponseLifeEventIntent",
-                    "samples": [
-                        "yes"
-                    ]
-                },
-                {
-                    "name": "NoResponseLifeEventIntent",
-                    "samples": [
-                        "no"
                     ]
                 },
                 {
