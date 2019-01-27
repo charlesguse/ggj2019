@@ -18,10 +18,10 @@ const LaunchRequestHandler = {
       }
 
       attributesManager.setSessionAttributes(attributes);
-
-      const speechText = 'The game has invoked itself properly.'      ;
+      var speechoutput = '<audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
+      //const speechText = 'The game has invoked itself properly.'      ;
       return handlerInput.responseBuilder
-        .speak(speechText)
+        .speak(speechoutput)
         .reprompt(speechText)
         .getResponse();
     }
@@ -42,7 +42,7 @@ const HelloWorldIntentHandler = {
       
       const speechText = 'Yay! I got past getting attributes! '+counterValue;
       attributes.counter+=1;
-      
+
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt('this is the reprompt Dan put in')
