@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "goodbye node",
+            "invocationName": "can we keep him",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -20,7 +20,6 @@
                     "slots": [],
                     "samples": [
                         "hello",
-                        "hola",
                         "how are you",
                         "say hi world",
                         "say hi",
@@ -28,7 +27,34 @@
                         "say hello world",
                         "say hello"
                     ]
+                },
+                {
+                    "name": "LetsMakeAPartyIntent",
+                    "samples": [
+                        "yes let us make a party",
+                        "we should party",
+                        "definitely party",
+                        "sure"
+                    ]
+                },
+                {
+                    "name": "TooCrazyIntent",
+                    "samples": [
+                        "no that is too crazy",
+                        "no",
+                        "too crazy",
+                        "crazy"
+                    ]
+                },
+                {
+                    "name": "IWillMakeItWorkIntent",
+                    "samples": [
+                        "i will make it work",
+                        "it can work",
+                        "make it work"
+                    ]
                 }
+
             ],
             "types": []
         }
