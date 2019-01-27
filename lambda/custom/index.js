@@ -144,7 +144,7 @@ const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
     const attributesManager = handlerInput.attributesManager;
     attributes = attributesManager.getSessionAttributes();
-    const theCurrentQuestion = attributesManager.currentQuestion;
+    const theCurrentQuestion = attributes.currentQuestion;
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
