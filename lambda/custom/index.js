@@ -108,7 +108,9 @@ const IntentReflectorHandler = {
     handle(handlerInput) {
 
       const attributesManager = handlerInput.attributesManager;
-      const theCurrentQuestion = attributesManager.currentQuestion;
+      attributes = attributesManager.getSessionAttributes();
+      const theCurrentQuestion = attributes.currentQuestion;
+      
 
       const intentName = handlerInput.requestEnvelope.request.intent.name;
       const speechText = `You just triggered ${intentName} with current question` + theCurrentQuestion;
@@ -141,6 +143,7 @@ const ErrorHandler = {
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
     const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
     const theCurrentQuestion = attributesManager.currentQuestion;
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
