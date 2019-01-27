@@ -14,12 +14,12 @@ const LaunchRequestHandler = {
       //by thinking I could just write to it without doing any preparation.
       const attributesManager = handlerInput.attributesManager;
       
-      const attributes = await attributesManager.getPersistentAttributes() || {};
-      if (Object.keys(attributes).length === 0) {
-        attributes.counter = 0;
-      }
+      // const attributes = await attributesManager.getPersistentAttributes() || {};
+      // if (Object.keys(attributes).length === 0) {
+      //   attributes.counter = 0;
+      // }
 
-      attributes.setSessionAttributes(attributes);
+      // attributes.setSessionAttributes(attributes);
 
       //DAN - JAN26 11 PM
       //REMOVING THE NEXT LINE AND MAKING IT A COMMENT:
