@@ -75,6 +75,15 @@
                         "oh hell no",
                         "tell terrance no"
                     ]
+                }.
+                {
+                    "name": "DetermineOutcomeIntent",
+                    "samples": [
+                        "what is my outcome",
+                        "did i win",
+                        "how did i do",
+                        "what is my final score"
+                    ]
                 }
 
             ],

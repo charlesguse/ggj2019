@@ -12,6 +12,11 @@ const S1MAKEITWORKFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-a
 const S2FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Prompt_Genet.mp3" /> ';
 const S2YESBUTTERSFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Out1_Yes.mp3" /> ';
 const S2NOBUTTERSFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Out2_No.mp3" /> ';
+const OUTCOMEBLISSFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Outcome_BLISS.mp3" /> ';
+const OUTCOMEBROKEFILELOCATION  = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Outcome_BROKE.mp3" /> ';
+const OUTCOMEMONEYFILELOCATION  = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Outcome_MONEY.mp3" /> ';
+const OUTCOMESTRESSFILELOCATION  = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Outcome_STRESS.mp3" /> ';
+
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -43,7 +48,7 @@ const LaunchRequestHandler = {
       const speechText =  GAMEINTROFILELOCATION + alexaScoreReport + S1FILELOCATION;
       return handlerInput.responseBuilder
         .speak(speechText)
-        .reprompt(speechText)
+        .reprompt("You can say something like I can make it work, sounds like a party, or no, it is too crazy.")
         .getResponse();
     }
 };
@@ -61,8 +66,7 @@ const HelloWorldIntentHandler = {
 
       attributes = attributesManager.getSessionAttributes();
       const counterValue = attributes.counter;
-      //const speechText =  'yay! <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
-      //const speechText = 'Yay! I got past getting attributes! '+counterValue;
+      
       speechText = 'Yay!'
       
       attributes.counter+=1;
@@ -180,10 +184,6 @@ const LetsMakeAPartyIntentHandler = {
     attributes.currentQuestion += 1; //Setting up to handle next question
 
     const alexaScoreReport = BuildScoreString(handlerInput);
-
-    console.log("HANDLER 1 of 3 FOR S1");
-    console.log("attributes");
-    console.log(JSON.stringify(attributes, null, 2));
       
     const speechText = S1YESFILELOCATION +  alexaScoreReport + S2FILELOCATION ;
     
@@ -205,10 +205,12 @@ const TooCrazyIntentHandler = {
     const attributesManager = handlerInput.attributesManager;
 
     attributes = attributesManager.getSessionAttributes();
-    attributes.currentQuestion += 1;//Setting up to handle next question
+    attributes.currentQuestion += 1;
     
-    const speechText = S1NOFILELOCATION + S2FILELOCATION;
-  //  this.emit(':ask','this is the second question text. DRN what do we do?');
+    const alexaScoreReport = BuildScoreString(handlerInput);
+
+    const speechText = S1NOFILELOCATION + alexaScoreReport + S2FILELOCATION;
+  
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
@@ -238,8 +240,10 @@ const IWillMakeItWorkIntentHandler = {
     attributes.cats -= 2;
     attributes.currentQuestion += 1;//Setting up to handle next question
 
+    const alexaScoreReport = BuildScoreString(handlerInput);
+
     // Any cleanup logic goes here.
-    const speechText = S1MAKEITWORKFILELOCATION + ' You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + 'percent!' + S2FILELOCATION;
+    const speechText = S1MAKEITWORKFILELOCATION + alexaScoreReport  + S2FILELOCATION;
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
@@ -271,12 +275,13 @@ const TakeButtersInHandler = {
     //const cats = attributes.cats + 1;
 
     attributes.cash -= 100;
-    //attributes.cats += 1;
-    const speechText = S2YESBUTTERSFILELOCATION;
+    const alexaScoreReport = BuildScoreString(handlerInput);
+
+    const speechText = S2YESBUTTERSFILELOCATION + alexaScoreReport;
   
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('WILL THIS ASK QUESTION TWO?!')
+      .reprompt('You can say something like "what is my outcome?"')
       .getResponse();
   }
 };
@@ -295,16 +300,54 @@ const DoNotTakeButtersInHandler = {
     const cash =  attributes.cash - 100;
 
     attributes.cash -= 100;
-    
-    const speechText = S2NOBUTTERSFILELOCATION;
+
+    const alexaScoreReport = BuildScoreString(handlerInput);
+
+    const speechText = S2NOBUTTERSFILELOCATION + alexaScoreReport;
   
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('WILL THIS ASK QUESTION TWO?!')
+      .reprompt('You can say something like "what is my outcome?"')
       .getResponse();
   }
 };
 
+//OUTCOME HANDLER
+const DetermineOutcomeIntentHandler = {
+  canHandle(handlerInput) {
+    
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
+    },
+  handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+
+    attributes = attributesManager.getSessionAttributes();
+    const cash =  attributes.cash;
+    const crazylevel = attributes.crazy;
+    let speechText = "no special outcome";
+    if (cash > 1001)
+    {
+      speechText = OUTCOMEMONEYFILELOCATION
+    }else if (cash < 801){
+      speechText = OUTCOMEBROKEFILELOCATION
+    }else if (crazylevel > 50){
+      speechText = OUTCOMESTRESSFILELOCATION
+    }else{
+      speechText = OUTCOMEBLISSFILELOCATION
+    };
+  
+ 
+   const alexaScoreReport = BuildScoreString(handlerInput);
+
+    const speechText =  alexaScoreReport + speechText;
+  
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse();
+  }
+};
 
 const LifeEventIntentHandler = {
   canHandle(handlerInput) {
@@ -407,6 +450,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     IWillMakeItWorkIntentHandler,
     TakeButtersInHandler,
     DoNotTakeButtersInHandler,
+    DetermineOutcomeIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
