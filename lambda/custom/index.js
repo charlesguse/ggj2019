@@ -142,9 +142,10 @@ const ErrorHandler = {
 
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
-    attributes = attributesManager.getSessionAttributes();
-    const theCurrentQuestion = attributes.currentQuestion;
+    // const attributesManager = handlerInput.attributesManager;
+    // attributes = attributesManager.getSessionAttributes();
+    // const theCurrentQuestion = attributes.currentQuestion;
+    const theCurrentQuestion = GetQuestionNumber(handlerInput);
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
@@ -171,9 +172,11 @@ const LetsMakeAPartyIntentHandler = {
 
 const TooCrazyIntentHandler = {
   canHandle(handlerInput) {
+    const theCurrentQuestion = GetQuestionNumber(handlerInput);
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'TooCrazyIntent';
-  },
+      && handlerInput.requestEnvelope.request.intent.name === 'TooCrazyIntent'
+      && theCurrentQuestion == 1;
+    },
   handle(handlerInput) {
     const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars';
   //  this.emit(':ask','this is the second question text. DRN what do we do?');
@@ -186,8 +189,10 @@ const TooCrazyIntentHandler = {
 
 const IWillMakeItWorkIntentHandler = {
   canHandle(handlerInput) {
+    const theCurrentQuestion = GetQuestionNumber(handlerInput);
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'IWillMakeItWorkIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'IWillMakeItWorkIntent'
+      && theCurrentQuestion == 1;
   },
   handle(handlerInput) {
     
@@ -230,3 +235,10 @@ exports.handler = Alexa.SkillBuilders.custom()
   .addErrorHandlers(
     ErrorHandler)
   .lambda();
+
+//DRN - Centralizing the logic to get Session value for current question number. 
+function GetQuestionNumber(handlerInput) {
+  const attributesManager = handlerInput.attributesManager;
+  attributes = attributesManager.getSessionAttributes();
+  return attributes.currentQuestion;
+}
