@@ -315,9 +315,9 @@ const DoNotTakeButtersInHandler = {
 //OUTCOME HANDLER
 const DetermineOutcomeIntentHandler = {
   canHandle(handlerInput) {
-    
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
+    return handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
+    // return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+    //   && handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
     },
   handle(handlerInput) {
     const attributesManager = handlerInput.attributesManager;
