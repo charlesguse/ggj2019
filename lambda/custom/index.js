@@ -40,7 +40,7 @@ const LaunchRequestHandler = {
       attributesManager.setSessionAttributes(attributes);
       const alexaScoreReport = BuildScoreString(handlerInput);
       //Next: Add alexa prompt in middle
-      const speechText =  GAMEINTROFILELOCATION + alexaScoreReport + 'Good luck! '+ S1FILELOCATION;
+      const speechText =  GAMEINTROFILELOCATION + alexaScoreReport + S1FILELOCATION;
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -174,10 +174,13 @@ const LetsMakeAPartyIntentHandler = {
     attributes.currentQuestion += 1; //Setting up to handle next question
 
     const alexaScoreReport = BuildScoreString(handlerInput);
+
+    console.log("HANDLER 1 of 3 FOR S1");
+    console.log("attributes");
+    console.log(JSON.stringify(attributes, null, 2));
       
-    //const speechText = S1YESFILELOCATION +  'You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
-    const speechText = S1YESFILELOCATION +  alexaScoreReport + S2FILELOCATION;
-    //const speechText = S1YESFILELOCATION + 
+    const speechText = S1YESFILELOCATION +  alexaScoreReport + S2FILELOCATION ;
+    
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
@@ -241,7 +244,14 @@ const IWillMakeItWorkIntentHandler = {
 //S2 HANDLER1 - TAKE IN BUTTER
 const TakeButtersInHandler = {
   canHandle(handlerInput) {
+
     const theCurrentQuestion = GetQuestionNumber(handlerInput);
+
+    attributes = handlerInput.attributesManager.getSessionAttributes();
+    console.log("S2 HANDLER1 - TAKE IN BUTTER");
+    console.log("attributes");
+    console.log(JSON.stringify(attributes, null, 2));
+    
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'TakeButtersInIntent'
       && theCurrentQuestion == 2;
