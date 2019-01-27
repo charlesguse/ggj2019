@@ -23,7 +23,7 @@ const LaunchRequestHandler = {
       attributesManager.setSessionAttributes(attributes);
 
       const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" /> Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
-      speechText = speechText + 'You have ' + attributes.cats + ' cats, ' + attributes.cash + ' dollars cash, and your crazy factor is ' + attributes.crazy + ' percent. Good luck!';
+      //speechText = speechText + 'You have ' + attributes.cats + ' cats, ' + attributes.cash + ' dollars cash, and your crazy factor is ' + attributes.crazy + ' percent. Good luck!';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -165,7 +165,7 @@ const IWillMakeItWorkIntentHandler = {
   },
   handle(handlerInput) {
     // Any cleanup logic goes here.
-    const speechText = 'You take in the cute Pepper, but realize that cats and dogs don not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100.';
+    const speechText = 'You take in the cute Pepper, but realize that cats and dogs do not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100.';
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('this is the reprompt Dan put in')
