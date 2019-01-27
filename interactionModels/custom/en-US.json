@@ -71,6 +71,27 @@
                     "samples": [
                         "no"
                     ]
+                },
+                {
+                    "name": "TakeButtersInIntent",
+                    "samples": [
+                        "take in butters",
+                        "tell tarrance yes",
+                        "take the poor thing in",
+                        "take in the cat",
+                        "take it in",
+                        "what the hell",
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "DoNotTakeButtersInIntent",
+                    "samples": [
+                        "no",
+                        "heck no",
+                        "oh hell no",
+                        "tell terrance no"
+                    ]
                 }
 
             ],

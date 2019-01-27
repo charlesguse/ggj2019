@@ -10,6 +10,8 @@ const S1YESFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-4
 const S1NOFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out2_No.mp3" />';
 const S1MAKEITWORKFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out3_MakeItWork.mp3" />';
 const S2FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Prompt_Genet.mp3" /> ';
+const S2YESBUTTERSFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Out1_Yes.mp3" /> ';
+const S2NOBUTTERSFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Out2_No.mp3" /> ';
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -151,12 +153,9 @@ const ErrorHandler = {
     }
 };
 
-//HANDLER FOR QUESTION 1
+//HANDLER 1 of 3 FOR S1
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
-    // const attributesManager = handlerInput.attributesManager;
-    // attributes = attributesManager.getSessionAttributes();
-    // const theCurrentQuestion = attributes.currentQuestion;
     const theCurrentQuestion = GetQuestionNumber(handlerInput);
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -172,7 +171,8 @@ const LetsMakeAPartyIntentHandler = {
     const cash =  attributes.cash + 300;
 
     attributes.cash += 300;
-    
+    attributes.currentQuestion += 1; //Setting up to handle next question
+
 
     const speechText = S1YESFILELOCATION +  'You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
     //const speechText = S1YESFILELOCATION + 
@@ -182,7 +182,7 @@ const LetsMakeAPartyIntentHandler = {
       .getResponse();
   }
 };
-
+//HANDLER 2 of 3 FOR S1
 const TooCrazyIntentHandler = {
   canHandle(handlerInput) {
     const theCurrentQuestion = GetQuestionNumber(handlerInput);
@@ -191,6 +191,11 @@ const TooCrazyIntentHandler = {
       && theCurrentQuestion == 1;
     },
   handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+
+    attributes = attributesManager.getSessionAttributes();
+    attributes.currentQuestion += 1;//Setting up to handle next question
+    
     const speechText = S1NOFILELOCATION + S2FILELOCATION;
   //  this.emit(':ask','this is the second question text. DRN what do we do?');
     return handlerInput.responseBuilder
@@ -199,7 +204,7 @@ const TooCrazyIntentHandler = {
       .getResponse();
   }
 };
-
+//HANDLER 3 of 3 FOR S1
 const IWillMakeItWorkIntentHandler = {
   canHandle(handlerInput) {
     const theCurrentQuestion = GetQuestionNumber(handlerInput);
@@ -221,6 +226,7 @@ const IWillMakeItWorkIntentHandler = {
     attributes.cash -= 100;
     attributes.crazy += 20
     attributes.cats -= 2;
+    attributes.currentQuestion += 1;//Setting up to handle next question
 
     // Any cleanup logic goes here.
     const speechText = S1MAKEITWORKFILELOCATION + ' You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + 'percent!' + S2FILELOCATION;
@@ -231,8 +237,40 @@ const IWillMakeItWorkIntentHandler = {
   }
 };
 
-
-
+//S2 HANDLER1 - TAKE IN BUTTER
+const TakeButtersInHandler = {
+  canHandle(handlerInput) {
+    const theCurrentQuestion = GetQuestionNumber(handlerInput);
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'TakeButtersInIntent'
+      && theCurrentQuestion == 2;
+    },
+  handle(handlerInput) {
+    const speechText = S2YESBUTTERSFILELOCATION;
+  
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('WILL THIS ASK QUESTION TWO?!')
+      .getResponse();
+  }
+};
+//S2 HANDLER2 - DO NOT TAKE IN BUTTER
+const DoNotTakeButtersInHandler = {
+  canHandle(handlerInput) {
+    const theCurrentQuestion = GetQuestionNumber(handlerInput);
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DoNotTakeButtersInIntent'
+      && theCurrentQuestion == 2;
+    },
+  handle(handlerInput) {
+    const speechText = S2NOBUTTERSFILELOCATION;
+  
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('WILL THIS ASK QUESTION TWO?!')
+      .getResponse();
+  }
+};
 
 
 const LifeEventIntentHandler = {
@@ -314,7 +352,8 @@ exports.handler = Alexa.SkillBuilders.custom()
     LifeEventIntentHandler,
     YesResponseLifeEventIntentHandler,
     NoResponseLifeEventIntentHandler,
-    
+    TakeButtersInHandler,
+    DoNotTakeButtersInHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
