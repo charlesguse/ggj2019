@@ -17,7 +17,7 @@ const LaunchRequestHandler = {
       const attributes = attributesManager.getPersistentAttributes() || {};
       if (Object.keys(attributes).length === 0) {
         attributes.counter = 0;
-        .speak("attribute length was zero")
+        this.emit("attribute length was zero")
       }
 
       // attributes.setSessionAttributes(attributes);
