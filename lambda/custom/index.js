@@ -176,6 +176,7 @@ const TooCrazyIntentHandler = {
   },
   handle(handlerInput) {
     const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars';
+    this.emit(':ask','this is the second question text. DRN what do we do?');
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
