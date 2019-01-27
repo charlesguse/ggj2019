@@ -19,7 +19,8 @@ const LaunchRequestHandler = {
 
       attributesManager.setSessionAttributes(attributes);
       //var speechoutput = '<audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
-      const speechText = 'The game has invoked itself properly.'      ;
+//      const speechText = 'The game has invoked itself properly.'      ;
+      const speechText =  'yay! <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
