@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "hello node",
+            "invocationName": "goodbye node",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -20,6 +20,7 @@
                     "slots": [],
                     "samples": [
                         "hello",
+                        "hola",
                         "how are you",
                         "say hi world",
                         "say hi",
