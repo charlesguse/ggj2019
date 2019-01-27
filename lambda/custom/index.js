@@ -300,6 +300,7 @@ const DoNotTakeButtersInHandler = {
     const cash =  attributes.cash - 100;
 
     attributes.cash -= 100;
+    attributes.crazy -=10;
 
     const alexaScoreReport = BuildScoreString(handlerInput);
 
