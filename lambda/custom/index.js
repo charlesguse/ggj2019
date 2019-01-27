@@ -22,10 +22,11 @@ const LaunchRequestHandler = {
 
       attributesManager.setSessionAttributes(attributes);
 
-      //DAN - JAN26 11 PM
-      //REMOVING THE NEXT LINE AND MAKING IT A COMMENT:
-      //handlerInput.attributesManager.setPersistentAttributes(attributes);//DRN
-      const speechText = 'Finally got invocation working!';
+      //DAN - JAN27 12:29 AM
+      //REMOVING THE COMMENT AND HOPING TO GET PERSISTENT ATTRIBUTE SET
+      //I WONDER IF I NEED "handlerInput." AT THE BEGINNING OF THE NEXT LINE;"
+      attributesManager.setPersistentAttributes(attributes);//DRN
+      const speechText = 'finally got persistent attributes working!'      ;
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
