@@ -58,7 +58,7 @@ Outputs:
             "apis": {
               "custom": {
                 "endpoint": {
-                  "uri": "${CustomDefaultFunction.Alias}"
+                  "uri": "${CustomDefaultFunction}"
                 }
               }
             }
