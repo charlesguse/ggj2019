@@ -18,8 +18,7 @@ const LaunchRequestHandler = {
       }
 
       attributesManager.setSessionAttributes(attributes);
-      //var speechoutput = '<audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
-//      const speechText = 'The game has invoked itself properly.'      ;
+
       const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -27,6 +26,7 @@ const LaunchRequestHandler = {
         .getResponse();
     }
 };
+//The goal is to deprecate this with additional handlers.
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -40,8 +40,10 @@ const HelloWorldIntentHandler = {
 
       attributes = attributesManager.getSessionAttributes();
       const counterValue = attributes.counter;
-      const speechText =  'yay! <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
+      //const speechText =  'yay! <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
       //const speechText = 'Yay! I got past getting attributes! '+counterValue;
+      speechText = 'Yay!'
+      
       attributes.counter+=1;
 
       return handlerInput.responseBuilder
