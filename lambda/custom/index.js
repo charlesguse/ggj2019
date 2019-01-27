@@ -18,6 +18,7 @@ const LaunchRequestHandler = {
         attributes.cats = 2; //Start with two cats? STORYQUESTION
         attributes.cash = 1000; //What is the starting cash? STORYQUESTION
         attributes.crazy = 50; //I was thinking of this as a percentage from zero to 100 STORYQUESTION
+        attributes.currentQuestion = 1; //Need to track this to keep track of which Intent should be used.
       }
 
       cats = attributes.cats;
@@ -135,8 +136,11 @@ const ErrorHandler = {
 
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
+    const attributesManager = handlerInput.currentQuestion;
+
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
+      && currentQuestion === 1;
   },
   handle(handlerInput) {
     
@@ -145,6 +149,9 @@ const LetsMakeAPartyIntentHandler = {
 
     attributes = attributesManager.getSessionAttributes();
     const cash =  attributes.cash - 300;
+
+    attributes.cash -= 300;
+    
 
     const speechText = 'You welcome Pepper with open arms and hold a party in her honor! One gift you bring are lotto tickets to celebrate her good luck. She is lucky because you just won $300! You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!';
     return handlerInput.responseBuilder
@@ -183,6 +190,10 @@ const IWillMakeItWorkIntentHandler = {
     const cash =  attributes.cash - 100;
     const crazy = attributes.crazy + 20;
     const cats = attributes.cats - 2;
+
+    attributes.cash -= 100;
+    attributes.crazy += 20
+    attributes.cats -= 2;
 
     // Any cleanup logic goes here.
     const speechText = 'You take in the cute Pepper, but realize that cats and dogs do not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100. You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + '!';

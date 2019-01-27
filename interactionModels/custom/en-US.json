@@ -33,13 +33,15 @@
                     "samples": [
                         "yes let us make a party",
                         "we should party",
-                        "definitely party"
+                        "definitely party",
+                        "sure"
                     ]
                 },
                 {
                     "name": "TooCrazyIntent",
                     "samples": [
                         "no that is too crazy",
+                        "no",
                         "too crazy",
                         "crazy"
                     ]
