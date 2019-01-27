@@ -40,7 +40,9 @@ const HelloWorldIntentHandler = {
       attributes = attributesManager.getSessionAttributes();
       const counterValue = attributes.counter;
       
-      const speechText = 'Yay! I got past getting attributes!'+counterValue;
+      const speechText = 'Yay! I got past getting attributes! '+counterValue;
+      attributes.counter+=1;
+      
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt('this is the reprompt Dan put in')
