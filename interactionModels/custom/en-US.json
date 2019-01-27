@@ -56,24 +56,6 @@
                     ]
                 },
                 {
-                    "name": "LifeEventIntent",
-                    "samples": [
-                        "event"
-                    ]
-                },
-                {
-                    "name": "YesResponseLifeEventIntent",
-                    "samples": [
-                        "yes"
-                    ]
-                },
-                {
-                    "name": "NoResponseLifeEventIntent",
-                    "samples": [
-                        "no"
-                    ]
-                },
-                {
                     "name": "TakeButtersInIntent",
                     "samples": [
                         "take in butters",

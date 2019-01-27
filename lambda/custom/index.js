@@ -268,10 +268,10 @@ const TakeButtersInHandler = {
 
     attributes = attributesManager.getSessionAttributes();
     const cash =  attributes.cash - 100;
-    const cats = attributes.cats + 1;
+    //const cats = attributes.cats + 1;
 
     attributes.cash -= 100;
-    attributes.cats += 1;
+    //attributes.cats += 1;
     const speechText = S2YESBUTTERSFILELOCATION;
   
     return handlerInput.responseBuilder
@@ -407,9 +407,6 @@ exports.handler = Alexa.SkillBuilders.custom()
     IWillMakeItWorkIntentHandler,
     TakeButtersInHandler,
     DoNotTakeButtersInHandler,
-    LifeEventIntentHandler,
-    YesResponseLifeEventIntentHandler,
-    NoResponseLifeEventIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
