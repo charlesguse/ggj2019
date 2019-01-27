@@ -4,7 +4,6 @@
 //Template for Audio source tag: ' <audio src="PUTURLHERE" />';
 const Alexa = require('ask-sdk-core');
 const eventMap = require('event-map.json');
-
 const GAMEINTROFILELOCATION =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />';
 const S1FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Prompt.mp3" />';
 const S1YESFILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S1_Out1_Yes.mp3" />';
@@ -301,6 +300,7 @@ const NoResponseLifeEventIntentHandler = {
 
 
 
+
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
@@ -313,6 +313,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     LifeEventIntentHandler,
     YesResponseLifeEventIntentHandler,
     NoResponseLifeEventIntentHandler,
+    
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
