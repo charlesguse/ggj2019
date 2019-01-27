@@ -38,9 +38,9 @@ const LaunchRequestHandler = {
       crazy = attributes.crazy;
 
       attributesManager.setSessionAttributes(attributes);
-
-      //const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />  You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
-      const speechText =  GAMEINTROFILELOCATION +  ' You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! '+ S1FILELOCATION;
+      const alexaScoreReport = BuildScoreString(handlerInput);
+      //const speechText =  GAMEINTROFILELOCATION +  ' You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! '+ S1FILELOCATION;
+      const speechText =  GAMEINTROFILELOCATION + alexaScoreReport + 'Good luck! '+ S1FILELOCATION;
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -215,7 +215,6 @@ const IWillMakeItWorkIntentHandler = {
   handle(handlerInput) {
     
     // Lose 2 cats, gain 20 stress and lose $100.';
-    //let's just see if we can get to the attributes 
     const attributesManager = handlerInput.attributesManager;
 
     attributes = attributesManager.getSessionAttributes();
@@ -246,6 +245,15 @@ const TakeButtersInHandler = {
       && theCurrentQuestion == 2;
     },
   handle(handlerInput) {
+
+    const attributesManager = handlerInput.attributesManager;
+
+    attributes = attributesManager.getSessionAttributes();
+    const cash =  attributes.cash - 100;
+    const cats = attributes.cats + 1;
+
+    attributes.cash -= 100;
+    attributes.cats += 1;
     const speechText = S2YESBUTTERSFILELOCATION;
   
     return handlerInput.responseBuilder
@@ -263,6 +271,13 @@ const DoNotTakeButtersInHandler = {
       && theCurrentQuestion == 2;
     },
   handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+
+    attributes = attributesManager.getSessionAttributes();
+    const cash =  attributes.cash - 100;
+
+    attributes.cash -= 100;
+    
     const speechText = S2NOBUTTERSFILELOCATION;
   
     return handlerInput.responseBuilder
@@ -397,4 +412,16 @@ function AwaitingResponse(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
   attributes = attributesManager.getSessionAttributes();
   return attributes.awaitingResponse;
+}
+
+function BuildScoreString(handlerInput){
+  const attributesManager = handlerInput.attributesManager;
+
+  attributes = attributesManager.getSessionAttributes();
+  const cash =  attributes.cash;
+  const crazy = attributes.crazy;
+  const cats = attributes.cats;
+
+
+  return ' You have ' + cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent.';
 }
