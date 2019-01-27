@@ -164,7 +164,7 @@ const LetsMakeAPartyIntentHandler = {
     const speechText = 'You welcome Pepper with open arms and hold a party in her honor! One gift you bring are lotto tickets to celebrate her good luck. She is lucky because you just won $300! You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('this is the reprompt Dan put in')
+      .reprompt('WILL THIS ASK QUESTION TWO?!')
       .getResponse();
   }
 };
@@ -178,7 +178,7 @@ const TooCrazyIntentHandler = {
     const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('this is the reprompt Dan put in')
+      .reprompt('WILL THIS ASK QUESTION TWO?!')
       .getResponse();
   }
 };
@@ -207,7 +207,7 @@ const IWillMakeItWorkIntentHandler = {
     const speechText = 'You take in the cute Pepper, but realize that cats and dogs do not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100. You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + '!';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt('this is the reprompt Dan put in')
+      .reprompt('WILL THIS ASK QUESTION TWO?!')
       .getResponse();
   }
 };
