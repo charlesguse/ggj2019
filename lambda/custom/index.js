@@ -2,6 +2,7 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
+const eventMap = require('event-map.json');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -19,6 +20,8 @@ const LaunchRequestHandler = {
         attributes.cash = 1000; //What is the starting cash? STORYQUESTION
         attributes.crazy = 50; //I was thinking of this as a percentage from zero to 100 STORYQUESTION
         attributes.currentQuestion = 1; //Need to track this to keep track of which Intent should be used.
+        attributes.charlieCurrentQuestion = -1;
+        attributes.awaitingResponse = false;
       }
 
       cats = attributes.cats;
@@ -218,6 +221,75 @@ const IWillMakeItWorkIntentHandler = {
   }
 };
 
+
+
+
+
+const LifeEventIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'LifeEventIntent'
+      && !AwaitingResponse(handlerInput);
+  },
+  handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    attributes.awaitingResponse = true;
+
+    const length = length(eventMap.events);
+    do {
+      newQuestion = Math.floor(Math.random() * length);
+    } while (attributes.charlieCurrentQuestion !== newQuestion)
+    attributes.charlieCurrentQuestion = newQuestion;
+    let event = eventMap.events[newQuestion]
+    // Any cleanup logic goes here.
+    const speechText = event.prompt;
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
+const YesResponseLifeEventIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'YesResponseLifeEventIntent'
+      && AwaitingResponse(handlerInput);
+  },
+  handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    attributes.awaitingResponse = false;
+    const  currentQuestion = attributesManager.charlieCurrentQuestion;
+    let event = eventMap.events[currentQuestion];
+    const speechText = event.yes;
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
+const NoResponseLifeEventIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'NoResponseLifeEventIntent'
+      && AwaitingResponse(handlerInput);
+  },
+  handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    attributes.awaitingResponse = false;
+    const  currentQuestion = attributesManager.charlieCurrentQuestion;
+    let event = eventMap.events[currentQuestion];
+    const speechText = event.no;
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
+
+
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
@@ -241,4 +313,10 @@ function GetQuestionNumber(handlerInput) {
   const attributesManager = handlerInput.attributesManager;
   attributes = attributesManager.getSessionAttributes();
   return attributes.currentQuestion;
+}
+
+function AwaitingResponse(handlerInput) {
+  const attributesManager = handlerInput.attributesManager;
+  attributes = attributesManager.getSessionAttributes();
+  return attributes.awaitingResponse;
 }

@@ -53,6 +53,24 @@
                         "it can work",
                         "make it work"
                     ]
+                },
+                {
+                    "name": "LifeEventIntent",
+                    "samples": [
+                        "event"
+                    ]
+                },
+                {
+                    "name": "YesResponseLifeEventIntent",
+                    "samples": [
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "NoResponseLifeEventIntent",
+                    "samples": [
+                        "no"
+                    ]
                 }
 
             ],

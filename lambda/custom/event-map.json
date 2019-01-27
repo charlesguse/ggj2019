@@ -1,0 +1,19 @@
+{
+    "events": [
+        {
+            "prompt": "1",
+            "yes": "1 yes",
+            "no": "1 no"
+        },
+        {
+            "prompt": "2",
+            "yes": "2 yes",
+            "no": "2 no"
+        },
+        {
+            "prompt": "3",
+            "yes": "3 yes",
+            "no": "3 no"
+        }
+    ]
+}
