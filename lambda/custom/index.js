@@ -156,7 +156,13 @@ const ErrorHandler = {
 //HANDLER 1 of 3 FOR S1
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
-    const theCurrentQuestion = GetQuestionNumber(handlerInput);
+    console.log("HANDLER 1 of 3 FOR S1 canHandle Start");
+
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    theCurrentQuestion = attributes.currentQuestion;
+    console.log("HANDLER 1 of 3 FOR S1 canHandle have QuestionNumber");
+    //const theCurrentQuestion = GetQuestionNumber(handlerInput);
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
