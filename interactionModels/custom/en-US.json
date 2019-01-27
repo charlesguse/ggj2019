@@ -80,8 +80,10 @@
                     "name": "DetermineOutcomeIntent",
                     "samples": [
                         "what is my outcome",
+                        "give me my outcome",
                         "did i win",
                         "how did i do",
+                        "what is my score",
                         "what is my final score"
                     ]
                 }

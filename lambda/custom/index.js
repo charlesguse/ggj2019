@@ -325,16 +325,16 @@ const DetermineOutcomeIntentHandler = {
     attributes = attributesManager.getSessionAttributes();
     const cash =  attributes.cash;
     const crazylevel = attributes.crazy;
-    let speechText = "no special outcome";
+    speechText = "no special outcome";
     if (cash > 1001)
     {
-      speechText = OUTCOMEMONEYFILELOCATION
+      speechText = OUTCOMEMONEYFILELOCATION;
     }else if (cash < 801){
-      speechText = OUTCOMEBROKEFILELOCATION
+      speechText = OUTCOMEBROKEFILELOCATION;
     }else if (crazylevel > 50){
-      speechText = OUTCOMESTRESSFILELOCATION
+      speechText = OUTCOMESTRESSFILELOCATION;
     }else{
-      speechText = OUTCOMEBLISSFILELOCATION
+      speechText = OUTCOMEBLISSFILELOCATION;
     };
   
  
