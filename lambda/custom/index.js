@@ -8,7 +8,22 @@ const LaunchRequestHandler = {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-      this.attributes.counter = 0;
+
+      //DAN - JAN26 11 PM
+      //Try setting up the Attributes Manager... I think I jumpted the shark
+      //by thinking I could just write to it without doing any preparation.
+      const attributesManager = handlerInput.attributesManager;
+      
+      const attributes = await attributesManager.getPersistentAttributes() || {};
+      if (Object.keys(attributes).length === 0) {
+        attributes.counter = 0;
+      }
+
+      attributes.setSessionAttributes(attributes);
+
+      //DAN - JAN26 11 PM
+      //REMOVING THE NEXT LINE AND MAKING IT A COMMENT:
+      //handlerInput.attributesManager.setPersistentAttributes(attributes);//DRN
       const speechText = 'Welcome, you can say Hello or Help. Which would you like to try?';
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -23,7 +38,9 @@ const HelloWorldIntentHandler = {
     },
     handle(handlerInput) {
       console.log(JSON.stringify(handlerInput,null,2));
-      this.attributes.counter += 1;
+      //OLD JUNK handlerInput.attributesManager.getPersistentAttribute();//DRN
+      //OLD JUNK this.attributes.counter += 1;
+      
       const speechText = 'Hello World!';//+ this.attributes.counter ;
       return handlerInput.responseBuilder
         .speak(speechText)
