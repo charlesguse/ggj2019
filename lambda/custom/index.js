@@ -242,19 +242,40 @@ const LifeEventIntentHandler = {
       && !AwaitingResponse(handlerInput);
   },
   handle(handlerInput) {
-    // const attributesManager = handlerInput.attributesManager;
-    // attributes = attributesManager.getSessionAttributes();
-    // attributes.awaitingResponse = true;
+    const attributesManager = handlerInput.attributesManager;
+    attributes = attributesManager.getSessionAttributes();
+    attributes.awaitingResponse = true;
 
-    // const length = length(eventMap.events);
-    // do {
-    //   newQuestion = Math.floor(Math.random() * length);
-    // } while (attributes.charlieCurrentQuestion !== newQuestion)
-    // attributes.charlieCurrentQuestion = newQuestion;
-    // let event = eventMap.events[newQuestion]
-    // // Any cleanup logic goes here.
-    // const speechText = event.prompt;
-    const speechText = "Dan be helpin";
+    console.log("LifeEventIntentHandler 1");
+    console.log("attributes");
+    console.log(JSON.stringify(attributes, null, 2));
+
+    const length = eventMap.events.length;
+    console.log("LifeEventIntentHandler 2");
+    console.log("length");
+    console.log(length);
+
+    do {
+      newQuestion = Math.floor(Math.random() * length);
+    } while (attributes.charlieCurrentQuestion !== newQuestion)
+    console.log("LifeEventIntentHandler 3");
+
+    attributes.charlieCurrentQuestion = newQuestion;
+    console.log("attributes");
+    console.log(JSON.stringify(attributes, null, 2));
+    
+    let event = eventMap.events[newQuestion];
+    console.log("eventMap");
+    console.log(JSON.stringify(eventMap, null, 2));
+    console.log("event");
+    console.log(event);
+
+    // Any cleanup logic goes here.
+    const speechText = event.prompt;
+    console.log("LifeEventIntentHandler 4");
+    console.log("speechText");
+    console.log(speechText);
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
