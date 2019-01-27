@@ -2,7 +2,6 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
-var counter = 0;
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -25,7 +24,7 @@ const HelloWorldIntentHandler = {
     handle(handlerInput) {
       console.log(JSON.stringify(handlerInput,null,2));
       this.attributes.counter += 1;
-      const speechText = 'Hello World!'+counter;
+      const speechText = 'Hello World!'+ this.attributes.counter ;
       return handlerInput.responseBuilder
         .speak(speechText)
         //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
