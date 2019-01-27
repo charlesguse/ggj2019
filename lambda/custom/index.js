@@ -169,9 +169,9 @@ const LetsMakeAPartyIntentHandler = {
     const attributesManager = handlerInput.attributesManager;
 
     attributes = attributesManager.getSessionAttributes();
-    const cash =  attributes.cash - 300;
+    const cash =  attributes.cash + 300;
 
-    attributes.cash -= 300;
+    attributes.cash += 300;
     
 
     const speechText = S1YESFILELOCATION +  'You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
