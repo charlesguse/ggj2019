@@ -14,10 +14,11 @@ const LaunchRequestHandler = {
       //by thinking I could just write to it without doing any preparation.
       const attributesManager = handlerInput.attributesManager;
       
-      // const attributes = await attributesManager.getPersistentAttributes() || {};
-      // if (Object.keys(attributes).length === 0) {
-      //   attributes.counter = 0;
-      // }
+      const attributes = attributesManager.getPersistentAttributes() || {};
+      if (Object.keys(attributes).length === 0) {
+        attributes.counter = 0;
+        .speak("attribute length was zero")
+      }
 
       // attributes.setSessionAttributes(attributes);
 
