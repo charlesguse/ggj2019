@@ -277,7 +277,7 @@ const TakeButtersInHandler = {
     attributes.cash -= 100;
     const alexaScoreReport = BuildScoreString(handlerInput);
 
-    const speechText = S2YESBUTTERSFILELOCATION + alexaScoreReport;
+    const speechText = S2YESBUTTERSFILELOCATION + alexaScoreReport + OUTCOMESTRESSFILELOCATION;
   
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -303,7 +303,7 @@ const DoNotTakeButtersInHandler = {
 
     const alexaScoreReport = BuildScoreString(handlerInput);
 
-    const speechText = S2NOBUTTERSFILELOCATION + alexaScoreReport;
+    const speechText = S2NOBUTTERSFILELOCATION + alexaScoreReport + OUTCOMEBLISSFILELOCATION;
   
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -315,9 +315,9 @@ const DoNotTakeButtersInHandler = {
 //OUTCOME HANDLER
 const DetermineOutcomeIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
-    // return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-    //   && handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
+    
+     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+       && handlerInput.requestEnvelope.request.intent.name === 'DetermineOutcomeIntent';
     },
   handle(handlerInput) {
     const attributesManager = handlerInput.attributesManager;
