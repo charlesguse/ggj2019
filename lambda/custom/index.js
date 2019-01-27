@@ -2,6 +2,7 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
+const S2FILELOCATION = ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/S2_Prompt_Genet.mp3" /> ';
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -27,7 +28,8 @@ const LaunchRequestHandler = {
 
       attributesManager.setSessionAttributes(attributes);
 
-      const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />  You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
+      //const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />  You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
+      const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" />  You have ' + attributes.cats + ' cats, ' + cash + ' dollars cash, and your crazy factor is ' + crazy + ' percent. Good luck! '+' Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
@@ -140,6 +142,7 @@ const ErrorHandler = {
     }
 };
 
+//HANDLER FOR QUESTION 1
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
     // const attributesManager = handlerInput.attributesManager;
@@ -162,7 +165,7 @@ const LetsMakeAPartyIntentHandler = {
     attributes.cash -= 300;
     
 
-    const speechText = 'You welcome Pepper with open arms and hold a party in her honor! One gift you bring are lotto tickets to celebrate her good luck. She is lucky because you just won $300! You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!';
+    const speechText = 'You welcome Pepper with open arms and hold a party in her honor! One gift you bring are lotto tickets to celebrate her good luck. She is lucky because you just won $300! You now have ' +cash +' dollars! Pepper seems to get along with your feline friends as well!' + S2FILELOCATION;
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
@@ -178,7 +181,7 @@ const TooCrazyIntentHandler = {
       && theCurrentQuestion == 1;
     },
   handle(handlerInput) {
-    const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars';
+    const speechText = 'You apologize for any inconvenience, but life is just too crazy. Gain 0 stress relief and 0 Dollars' + S2FILELOCATION;
   //  this.emit(':ask','this is the second question text. DRN what do we do?');
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -210,7 +213,7 @@ const IWillMakeItWorkIntentHandler = {
     attributes.cats -= 2;
 
     // Any cleanup logic goes here.
-    const speechText = 'You take in the cute Pepper, but realize that cats and dogs do not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100. You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + '!';
+    const speechText = 'You take in the cute Pepper, but realize that cats and dogs do not mix and two of your kitties run away into the walls. Catherine also forgot to mention that sweet innocent Pepper is not house broken and she makes you lose your pet deposit. Lose 2 cats, gain 20 stress and lose $100. You now have '+cats+' cats, ' + cash + ' dollars, and your crazy factor is up to ' + crazy + '!' + S2FILELOCATION;
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt('WILL THIS ASK QUESTION TWO?!')
