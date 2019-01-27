@@ -15,11 +15,15 @@ const LaunchRequestHandler = {
       const attributes = attributesManager.getPersistentAttributes() || {};
       if (Object.keys(attributes).length === 0) {
         attributes.counter = 0;
+        attributes.cats = 2; //Start with two cats? STORYQUESTION
+        attributes.cash = 1000; //What is the starting cash? STORYQUESTION
+        attributes.crazy = 50; //I was thinking of this as a percentage from zero to 100 STORYQUESTION
       }
 
       attributesManager.setSessionAttributes(attributes);
 
       const speechText =  ' <audio src="https://s3.amazonaws.com/public-andrew-460481562341-us-east-1/Game_Intro.mp3" /> Your friend Catherine has to leave for a business conference out of town. She has not been able to find anyone to watch her Jack Russell Terrier puppy while she is gone. She is asking if Pepper can stay with you for just a few days. How do you respond? YES, let us make it a party? NO, I would love to but it is too crazy right now? Or, I will make it work?';
+      speechText = speechText + 'You have ' + attributes.cats + ' cats, ' + attributes.cash + ' dollars cash, and your crazy factor is ' + attributes.crazy + ' percent. Good luck!';
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt(speechText)
