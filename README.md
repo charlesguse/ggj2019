@@ -1,3 +1,11 @@
+Cats, Cash, and Crazy
+========================================================================================
+You are trying to run a household. Your roommates are there to help with the financial burdens of being an adult. The stress of life is often helped by the love of animals. In order to be a healthy functioning adult, you need to balance your financial and emotional stress levels. Can you manage to make it through each month with enough money while keeping the stress levels down?
+
+The instructions below speak towards how to get the Alexa skill running in your own environment.
+
+
+
 Welcome to the AWS CodeStar 'hello world' sample project for  Alexa Skills Kit (Node.js)
 ========================================================================================
 
