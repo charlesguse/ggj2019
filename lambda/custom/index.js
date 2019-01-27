@@ -136,11 +136,12 @@ const ErrorHandler = {
 
 const LetsMakeAPartyIntentHandler = {
   canHandle(handlerInput) {
-    const attributesManager = handlerInput.currentQuestion;
+    const attributesManager = handlerInput.attributesManager;
+    const theCurrentQuestion = attributesManager.currentQuestion;
 
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'LetsMakeAPartyIntent'
-      && currentQuestion === 1;
+      && theCurrentQuestion === 1;
   },
   handle(handlerInput) {
     
