@@ -31,7 +31,7 @@
                 {
                     "name": "LetsMakeAPartyIntent",
                     "samples": [
-                        "yes, let's make a party",
+                        "yes let us make a party",
                         "we should party",
                         "definitely party"
                     ]
@@ -39,7 +39,7 @@
                 {
                     "name": "TooCrazyIntent",
                     "samples": [
-                        "no, that's too crazy",
+                        "no that is too crazy",
                         "too crazy",
                         "crazy"
                     ]
