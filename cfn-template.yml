@@ -14,14 +14,14 @@ Parameters:
     Type: String
     Description: The name for a project pipeline stage, such as Staging or Prod, for which resources are provisioned and deployed.
     Default: ''
-
-# Globals:
-#   Function:
-#     AutoPublishAlias: live
-#     DeploymentPreference:
-#       Enabled: true
-#       Type: Canary10Percent5Minutes
-#       Role: !Ref CodeDeployRole
+    
+Globals:
+  Function:
+    AutoPublishAlias: live
+    DeploymentPreference:
+      Enabled: true
+      Type: AllAtOnce
+      Role: !Ref CodeDeployRole
 
 Resources:
   CustomDefaultFunction:
