@@ -9,8 +9,8 @@
             "Alexa tell hello node hello",
             "Alexa ask hello node say hello"
           ],
-          "name": "test-node",
-          "description": "A basic skill made from Alexa Skills Kit template"
+          "name": "can-we-keep-him",
+          "description": "A choose your own adventure game for GGJ2019."
         }
       },
       "isAvailableWorldwide": true,

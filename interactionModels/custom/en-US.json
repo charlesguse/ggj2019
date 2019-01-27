@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "goodbye node",
+            "invocationName": "Can we keep him",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
